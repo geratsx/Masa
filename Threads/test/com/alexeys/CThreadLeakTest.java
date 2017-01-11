@@ -16,17 +16,17 @@ public class CThreadLeakTest {
      */
     @Test
     public void testLeakThreads() {
-        Runnable r = () -> {
+        final Runnable r = () -> {
             try {
                 System.out.println(Thread.currentThread().getName() + " is going to sleep");
                 TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
+            } catch (final InterruptedException e) {
                 e.printStackTrace();
             }
         };
 
         for (int i = 0; i < 5_000; i++) {
-            Thread t = new Thread(r);
+            final Thread t = new Thread(r);
             t.start();
         }
     }
@@ -34,15 +34,16 @@ public class CThreadLeakTest {
 
     /**
      * By using thread pool you will not run out of memory
+     *
      * @throws InterruptedException
      */
     @Test
     public void testExecutor() throws InterruptedException {
         final int tasksNumber = 5_000;
-        ExecutorService executor = Executors.newFixedThreadPool(300);
+        final ExecutorService executor = Executors.newFixedThreadPool(300);
 
         // Latch allows to wait us X counts
-        CountDownLatch latch = new CountDownLatch(tasksNumber);
+        final CountDownLatch latch = new CountDownLatch(tasksNumber);
 
 
         for (int i = 0; i < tasksNumber; i++) {
@@ -50,7 +51,7 @@ public class CThreadLeakTest {
                 try {
                     System.out.println(Thread.currentThread().getName() + " is going to sleep");
                     TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e) {
+                } catch (final InterruptedException e) {
                     e.printStackTrace();
                 } finally {
                     latch.countDown();
