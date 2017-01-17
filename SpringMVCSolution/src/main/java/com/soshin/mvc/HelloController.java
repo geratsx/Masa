@@ -1,4 +1,4 @@
-package com.alexey.mvc;
+package com.soshin.mvc;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class HelloController {
 
-	@RequestMapping(method = RequestMethod.GET)
-	public String printWelcome() {
+    @RequestMapping(method = RequestMethod.GET)
+    public String printWelcome() {
 
-		return "index";
-	}
+        return "index";
+    }
 }

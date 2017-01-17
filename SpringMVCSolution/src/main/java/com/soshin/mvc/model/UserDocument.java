@@ -1,4 +1,4 @@
-package com.alexey.mvc.model;
+package com.soshin.mvc.model;
 
 import javax.persistence.*;
 
@@ -15,10 +15,10 @@ public class UserDocument {
     User user;
 
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
-    public void setId(Integer id) {
+    public void setId(final Integer id) {
         this.id = id;
     }
 }

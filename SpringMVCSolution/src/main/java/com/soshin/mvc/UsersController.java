@@ -1,6 +1,6 @@
-package com.alexey.mvc;
+package com.soshin.mvc;
 
-import com.alexey.mvc.model.User;
+import com.soshin.mvc.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class UsersController {
 
     // Log all events in a configurable way
-    static Logger log = Logger.getLogger(UsersController.class.getName());
+    private static final Logger log = Logger.getLogger(UsersController.class.getName());
 
     // Dependency injection of the DAO singleton that deals with users persistence
     @Resource(name = "usersJpaDao")
@@ -27,19 +27,19 @@ public class UsersController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public User createUser(User user) {
+    public User createUser(final User user) {
 
         if (isValid(user)) {
             log.info("Creating new user");
 
-            return userDao.create(user);
+            return this.userDao.create(user);
         } else {
             log.warning("Invalid user data received");
             return null;
         }
     }
 
-    private boolean isValid(User user) {
+    private boolean isValid(final User user) {
         return !StringUtils.isEmpty(user.getName());
     }
 
@@ -48,15 +48,15 @@ public class UsersController {
     public Collection<User> getAllUsers() {
         log.info("Returning all users");
 
-        return userDao.selectAll();
+        return this.userDao.selectAll();
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") String id) {
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") final String id) {
         log.info("Deleting user");
 
         if (id != null) {
-            if (userDao.delete(Integer.parseInt(id))) {
+            if (this.userDao.delete(Integer.parseInt(id))) {
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);

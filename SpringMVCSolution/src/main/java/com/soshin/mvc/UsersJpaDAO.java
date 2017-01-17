@@ -1,6 +1,6 @@
-package com.alexey.mvc;
+package com.soshin.mvc;
 
-import com.alexey.mvc.model.User;
+import com.soshin.mvc.model.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,35 +13,35 @@ import java.util.Collection;
 public class UsersJpaDAO implements IUserDAO {
 
     @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
 
     @Override
-    public User create(User user) {
-        em.persist(user);
+    public User create(final User user) {
+        this.em.persist(user);
 
 
         return user;
     }
 
     @Override
-    public boolean delete(Integer id) {
+    public boolean delete(final Integer id) {
 
-        em.remove(select(id));
+        this.em.remove(select(id));
         return true;
     }
 
     @Override
-    public User select(Integer id) {
-        return em.find(User.class, id);
+    public User select(final Integer id) {
+        return this.em.find(User.class, id);
     }
 
     @Override
-    public User update(User user) {
-        return em.merge(user);
+    public User update(final User user) {
+        return this.em.merge(user);
     }
 
     @Override
     public Collection<User> selectAll() {
-        return em.createQuery("select u from User u").getResultList();
+        return this.em.createQuery("select u from User u").getResultList();
     }
 }

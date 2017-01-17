@@ -1,4 +1,4 @@
-package com.alexey.mvc.model;
+package com.soshin.mvc.model;
 
 
 import javax.persistence.*;
@@ -20,27 +20,27 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<UserDocument> documents;
 
-    public void setId(int id) {
+    public void setId(final int id) {
         this.id = id;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "id=" + this.id +
+                ", name='" + this.name + '\'' +
                 '}';
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 

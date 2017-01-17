@@ -1,6 +1,6 @@
-package com.alexey.mvc;
+package com.soshin.mvc;
 
-import com.alexey.mvc.model.User;
+import com.soshin.mvc.model.User;
 
 /**
  * Extend DAO on specific class
