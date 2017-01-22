@@ -1,6 +1,7 @@
 package com.soshin.mvc;
 
 import com.soshin.mvc.model.User;
+import com.soshin.mvc.repo.IUserDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

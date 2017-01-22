@@ -1,4 +1,4 @@
-package com.soshin.mvc;
+package com.soshin.mvc.repo;
 
 import java.util.Collection;
 

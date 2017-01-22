@@ -1,5 +1,6 @@
-package com.soshin.mvc;
+package com.soshin.mvc.repo.jpa;
 
+import com.soshin.mvc.repo.IUserDAO;
 import com.soshin.mvc.model.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

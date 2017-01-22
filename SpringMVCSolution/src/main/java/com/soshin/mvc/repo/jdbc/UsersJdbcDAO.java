@@ -1,5 +1,6 @@
-package com.soshin.mvc;
+package com.soshin.mvc.repo.jdbc;
 
+import com.soshin.mvc.repo.IUserDAO;
 import com.soshin.mvc.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -17,7 +18,7 @@ import java.util.Map;
  * Implement CRUD for users
  */
 @Repository
-public class EmptyUsersDAO implements IUserDAO {
+public class UsersJdbcDAO implements IUserDAO {
 
     @Autowired
     NamedParameterJdbcTemplate template;
