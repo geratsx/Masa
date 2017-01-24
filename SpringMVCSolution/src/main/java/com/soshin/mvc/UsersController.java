@@ -1,10 +1,12 @@
 package com.soshin.mvc;
 
 import com.soshin.mvc.model.User;
+import com.soshin.mvc.model.UserDocument;
 import com.soshin.mvc.repo.IUserDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.logging.Logger;
 
 @Controller
@@ -64,6 +67,18 @@ public class UsersController {
             }
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}/documents")
+    @ResponseBody
+    public Collection<UserDocument> getDocumentsForUser(@PathVariable("id") final Integer userId) {
+        log.info("Getting user documents");
+
+        if (userId != null) {
+            return this.userDao.select(userId).getDocuments();
+        } else {
+            return Collections.emptyList();
         }
     }
 }

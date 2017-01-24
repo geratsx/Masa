@@ -1,7 +1,7 @@
 package com.soshin.mvc.repo.jpa;
 
-import com.soshin.mvc.repo.IUserDAO;
 import com.soshin.mvc.model.User;
+import com.soshin.mvc.repo.IUserDAO;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,10 +16,10 @@ public class UsersJpaDAO implements IUserDAO {
     @PersistenceContext
     private EntityManager em;
 
+
     @Override
     public User create(final User user) {
         this.em.persist(user);
-
 
         return user;
     }
@@ -30,6 +30,7 @@ public class UsersJpaDAO implements IUserDAO {
         this.em.remove(select(id));
         return true;
     }
+
 
     @Override
     public User select(final Integer id) {

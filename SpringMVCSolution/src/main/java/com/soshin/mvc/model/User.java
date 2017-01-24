@@ -17,7 +17,8 @@ public class User {
     @Column
     private String name;
 
-    @OneToMany(mappedBy = "user")
+    // Eager is needed since Jackson will serialize the collection later
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<UserDocument> documents;
 
     public void setId(final int id) {
@@ -44,4 +45,7 @@ public class User {
         this.name = name;
     }
 
+    public List<UserDocument> getDocuments() {
+        return this.documents;
+    }
 }

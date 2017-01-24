@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * Implement CRUD for users
  */
-@Repository
+@Repository("usersJdbcDao")
 public class UsersJdbcDAO implements IUserDAO {
 
     @Autowired
