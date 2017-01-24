@@ -15,13 +15,50 @@ function deleteUser(id) {
   });
 }
 
+
+function selectUser(userId) {
+  if (userId) {
+
+    // Saving userID into a hidden field
+    // This is just to keep the example simple
+    $("#userId").val(userId);
+
+    loadDocuments(userId);
+  }
+
+}
+
+function loadDocuments(userId) {
+  function createDocumentElement(document) {
+    return [
+      "<li>",
+      document.name,
+      "<a href = \"\">",
+      "X",
+      "</a>",
+      "</li>"
+    ].join("");
+  }
+
+
+  $.get("/user/" + userId + "/documents",
+      function documentsCallback(documents) {
+
+        $("#documentsList li").remove();
+        for (var i = 0; i < documents.length; i++) {
+          $("#documentsList").append(createDocumentElement(documents[i]));
+        }
+        $("#documents").show();
+      });
+}
+
 /**
  * Refreshes users list
  */
 function getUsers() {
 
   function createNewUserRow(user) {
-    var userDocumentsLink = ["<a href = \"javascript:viewDocuments(", user.id, ")\">", user.name, "</a>"].join("");
+    var userDocumentsLink = ["<a href = \"javascript:selectUser(", user.id, ")\">", user.name, "</a>"].join("");
     var deleteUserLink = ["<a href = \"javascript:deleteUser(", user.id, ")\">", "X", "</a>"].join("");
 
     return [
@@ -58,12 +95,27 @@ function createUser() {
   );
 }
 
+function addDocument() {
+
+
+  var userId = $("#userId").val();
+  var documentName = $("#documentName").val();
+  $.post("/user/" + userId + "/documents", {
+    "name": documentName
+  }, function () {
+    loadDocuments(userId)
+  });
+}
+
 $(document).ready(
     function () {
 
       getUsers();
 
       $("#addUserButton").click(createUser);
+      $("#addDocumentButton").click(addDocument);
+
+      $("#documents").hide();
     }
 );
 

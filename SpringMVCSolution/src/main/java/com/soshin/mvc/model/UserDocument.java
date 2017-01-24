@@ -11,8 +11,20 @@ public class UserDocument {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
+    @Column
+    private String name;
+
     @ManyToOne
     User user;
+
+
+    public UserDocument() {
+    }
+
+    public UserDocument(final String name) {
+        this.name = name;
+    }
 
     public Integer getId() {
         return this.id;
@@ -20,5 +32,13 @@ public class UserDocument {
 
     public void setId(final Integer id) {
         this.id = id;
+    }
+
+    public void setUser(final User user) {
+        this.user = user;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

@@ -18,7 +18,8 @@ public class User {
     private String name;
 
     // Eager is needed since Jackson will serialize the collection later
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    // Cascade means that all operations on user entity will also change documents
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<UserDocument> documents;
 
     public void setId(final int id) {

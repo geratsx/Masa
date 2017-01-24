@@ -6,12 +6,29 @@
 	<script src = "/js/main.js"></script>
 </head>
 <body class = "container">
-	<h1>Users</h1>
-	<ol id = "usersList">
+	<input id = "userId" type = "hidden" />
+	<div id = "users" class = "row">
 
-	</ol>
-	<h2>Add user</h2>
-	<input id = "firstName" type = 'text' name = "firstName" value = "Alexey" />
-	<input class = "btn btn-primary" id = "addUserButton" type = "button" value = "Add" />
+		<div class = "col-md-6">
+			<h1>Users</h1>
+			<ol id = "usersList">
+
+			</ol>
+			<h2>Add user</h2>
+			<input id = "firstName" type = 'text' name = "firstName" value = "Alexey" />
+			<input class = "btn btn-primary" id = "addUserButton" type = "button" value = "Add" />
+		</div>
+		<div id = "documents" class = "col-md-6">
+			<h1>Documents</h1>
+
+			<ol id = "documentsList">
+
+			</ol>
+			<h2>Add document</h2>
+			<input id = "documentName" type = 'text' name = "name" value = "Hunger Games" />
+			<input class = "btn btn-primary" id = "addDocumentButton" type = "button" value = "Add" />
+		</div>
+	</div>
+
 </body>
 </html>

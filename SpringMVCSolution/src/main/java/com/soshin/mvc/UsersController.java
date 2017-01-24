@@ -6,16 +6,13 @@ import com.soshin.mvc.repo.IUserDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -80,5 +77,27 @@ public class UsersController {
         } else {
             return Collections.emptyList();
         }
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/{id}/documents")
+    public ResponseEntity<HttpStatus> addDocument(@RequestParam("name") final String documentName,
+                                                  @PathVariable("id") final Integer userId) {
+
+        final User user = this.userDao.select(userId);
+        if (user != null) {
+            final List<UserDocument> documents = user.getDocuments();
+
+            // In two steps for clarity
+            final UserDocument document = new UserDocument(documentName);
+            document.setUser(user);
+            documents.add(document);
+
+            this.userDao.update(user);
+
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 }
