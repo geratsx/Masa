@@ -9,7 +9,7 @@ CREATE TABLE users
 (
   id        INT(11) AUTO_INCREMENT PRIMARY KEY    NOT NULL,
   name      VARCHAR(50)                           NOT NULL,
-  create_at TIMESTAMP DEFAULT 'CURRENT_TIMESTAMP' NOT NULL,
+  create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP   NOT NULL,
   last_name VARCHAR(50)
 );
 CREATE TABLE users_log
@@ -17,5 +17,5 @@ CREATE TABLE users_log
   id         INT(11) AUTO_INCREMENT PRIMARY KEY    NOT NULL,
   user_id    INT(11)                               NOT NULL,
   name       VARCHAR(50)                           NOT NULL,
-  changed_at TIMESTAMP DEFAULT 'CURRENT_TIMESTAMP' NOT NULL
+  changed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP   NOT NULL
 );
